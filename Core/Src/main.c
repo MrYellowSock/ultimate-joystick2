@@ -30,6 +30,7 @@
 #include "usbd_hid.h"
 #include <stdarg.h>
 #include <button.h>
+#include <joystick.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,11 +51,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-#define adc_channel_count 4
 #define COMMAND_SIZE 6
 extern USBD_HandleTypeDef hUsbDeviceFS;
 volatile uint32_t adc_dma_result[adc_channel_count];
-volatile uint32_t adc_dma_result_prev[adc_channel_count] = { 0 };
 volatile uint8_t reportBuffer[COMMAND_SIZE] = { 0 };
 volatile int16_t forces[2] = { 0 };
 /* USER CODE END PV */
@@ -119,21 +118,13 @@ void DEBUGPRINTF(const char *format, ...) {
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 	HAL_ADC_Stop_DMA(&hadc1);
-	int16_t x = adc_dma_result[0] * 255 / 4096 - 127;
-	int16_t y = adc_dma_result[1] * 255 / 4096 - 127;
-	int16_t Rx = adc_dma_result[2] * 255 / 4096 - 127;
-	int16_t Ry = adc_dma_result[3] * 255 / 4096 - 127;
-	if (adc_dma_result_prev[0] != x || adc_dma_result_prev[1] != y) {
-		adc_dma_result_prev[0] = x;
-		adc_dma_result_prev[1] = y;
-		setcmd_LeftXY(x, y);
+	StickStateEvent ev = onSticksChanged(adc_dma_result);
+	if(ev.isChanged){
+		setcmd_LeftXY(ev.x, ev.y);
+		setcmd_RightXY(ev.Rx, ev.Ry);
+		sendCommand();
 	}
-	if (adc_dma_result_prev[2] != Rx || adc_dma_result_prev[3] != Ry) {
-		adc_dma_result_prev[2] = Rx;
-		adc_dma_result_prev[3] = Ry;
-		setcmd_RightXY(Rx, Ry);
-	}
-	sendCommand();
+
 	HAL_Delay(3);
 //	DEBUGPRINTF("%u %u %u %u\n", x, y, Rx, Ry);
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t*) adc_dma_result, adc_channel_count);

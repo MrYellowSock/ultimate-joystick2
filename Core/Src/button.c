@@ -1,4 +1,3 @@
-#include "main.h"
 #include "button.h"
 #define debounce 20
 #define EXTI_COUNT 16

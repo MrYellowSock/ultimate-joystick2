@@ -7,6 +7,8 @@
 
 #ifndef INC_BUTTON_H_
 #define INC_BUTTON_H_
+#include "main.h"
+
 struct ButtonStateEvent {
 	// joystick button number , mapped by pinToButtonMapping
 	uint8_t button;
