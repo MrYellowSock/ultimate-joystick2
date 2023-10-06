@@ -11,8 +11,8 @@ const GPIO_TypeDef **portMapping[EXTI_COUNT] = {
 		GPIOE,		//3
 		GPIOA,		//4
 		GPIOB,		//5
-		GPIOG,		//6
-		GPIOG,		//7
+		GPIOE,		//6
+		GPIOF,		//7
 		GPIOE,		//8
 		GPIOE,		//9
 		GPIOE,		//10
