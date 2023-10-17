@@ -3,23 +3,24 @@
 #define EXTI_COUNT 16
 volatile uint8_t pinToButtonMapping[EXTI_COUNT] = { 0, 1, 2, 3, 4, 5, 6, 7, 8,
 		9, 10, 11, 12, 13, 14, 15 };
+//PG0 PG1 PE2 PE3 PC6  PF7 PE8 PC9 PC10 PC11 PC12 PD14 PF15
 const GPIO_TypeDef **portMapping[EXTI_COUNT] = {
-		GPIOE,   //0
+		GPIOG,   //0
 		GPIOG,	//1
-		GPIOB,	//2
+		GPIOE,	//2
 		GPIOE,		//3
-		GPIOA,		//4
-		GPIOB,		//5
-		GPIOE,		//6
+		NULL,		//4
+		NULL,		//5
+		GPIOC,		//6
 		GPIOF,		//7
 		GPIOE,		//8
-		GPIOE,		//9
-		GPIOE,		//10
-		GPIOE,		//11
-		GPIOF,		//12
-		GPIOF,		//13
+		GPIOC,		//9
+		GPIOC,		//10
+		GPIOC,		//11
+		GPIOC,		//12
+		NULL,		//13
 		GPIOD,		//14
-		GPIOD,		//15
+		GPIOF,		//15
 		};
 
 uint8_t toPortNumber(uint16_t GPIO_Pin) {
