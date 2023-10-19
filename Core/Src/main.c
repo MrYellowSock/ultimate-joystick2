@@ -52,7 +52,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-#define COMMAND_SIZE 6
 extern USBD_HandleTypeDef hUsbDeviceFS;
 volatile uint32_t adc_dma_result[adc_channel_count];
 volatile uint8_t reportBuffer[COMMAND_SIZE] = { 0 };

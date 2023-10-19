@@ -31,6 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#define COMMAND_SIZE 6
 
 /* USER CODE END Includes */
 
