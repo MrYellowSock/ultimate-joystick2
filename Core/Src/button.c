@@ -1,8 +1,8 @@
 #include "button.h"
 #define debounce 20
 #define EXTI_COUNT 16
-volatile uint8_t pinToButtonMapping[EXTI_COUNT] = { 0, 1, 2, 3, 4, 5, 6, 7, 8,
-		9, 10, 11, 12, 13, 14, 15 };
+volatile uint8_t pinToButtonMapping[EXTI_COUNT] = { 13, 12, 14, 15, 4, 5, 3, 8, 10,
+		1, 9, 0, 2, 13, 11, BUTTON_MACRO };
 //PG0 PG1 PE2 PE3 PC6  PF7 PE8 PC9 PC10 PC11 PC12 PD14 PF15
 const GPIO_TypeDef **portMapping[EXTI_COUNT] = {
 		GPIOG,   //0

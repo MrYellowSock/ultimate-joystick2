@@ -20,5 +20,19 @@ struct Action{
 	uint16_t timeSpan;
 } typedef Action;
 
+uint8_t getMacroState() ;
+void recordAdd(uint8_t cmd[COMMAND_SIZE]) ;
+
+void recordStart();
+void recordStop();
+void recordToggle() ;
+void playStart() ;
+
+// force stop
+void playStop() ;
+
+void playToggle() ;
+Action nextAction();
+
 
 #endif /* INC_MACRO_H_ */

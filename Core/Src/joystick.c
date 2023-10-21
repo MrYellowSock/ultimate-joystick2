@@ -3,9 +3,9 @@
 volatile uint32_t result_prev[adc_channel_count] = { 0 };
 
 StickStateEvent onSticksChanged(uint32_t adc_dma_result[adc_channel_count]) {
-	int16_t x = adc_dma_result[0] * 255 / 4096 - 127;
+	int16_t x = -(adc_dma_result[0] * 255 / 4096 - 127);
 	int16_t y = adc_dma_result[1] * 255 / 4096 - 127;
-	int16_t Rx = adc_dma_result[2] * 255 / 4096 - 127;
+	int16_t Rx = -(adc_dma_result[2] * 255 / 4096 - 127);
 	int16_t Ry = adc_dma_result[3] * 255 / 4096 - 127;
 
 	StickStateEvent ev;
