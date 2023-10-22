@@ -3,6 +3,8 @@
 #define EXTI_COUNT 16
 volatile uint8_t pinToButtonMapping[EXTI_COUNT] = { 13, 12, 14, 15, 4, 5, 3, 8, 10,
 		1, 9, 0, 2, 13, 11, BUTTON_MACRO };
+
+volatile uint8_t buttonState[EXTI_COUNT] = {0};
 //PG0 PG1 PE2 PE3 PC6  PF7 PE8 PC9 PC10 PC11 PC12 PD14 PF15
 const GPIO_TypeDef **portMapping[EXTI_COUNT] = {
 		GPIOG,   //0
@@ -44,11 +46,11 @@ ButtonStateEvent onButtonPinINT(uint16_t GPIO_Pin) {
 	uint8_t currentState = HAL_GPIO_ReadPin(portMapping[portNumber], GPIO_Pin);
 	ButtonStateEvent event;
 	event.button = 0xFF;
-	if((currentTick - pinLastTick[portNumber] > debounce) /*&& (currentState != pinLastState[portNumber])*/){
+	if((currentTick - buttonState[portNumber] > debounce) && (currentState != buttonState[portNumber])){
 		//allowed
 		event.button = pinToButtonMapping[portNumber];
 		event.state = currentState;
-//		pinLastState[portNumber] = currentState;
+		buttonState[portNumber] = currentState;
 		pinLastTick[portNumber] = currentTick;
 	}
 	return event;

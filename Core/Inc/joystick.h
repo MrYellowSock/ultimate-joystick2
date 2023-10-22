@@ -8,7 +8,8 @@
 #ifndef INC_JOYSTICK_H_
 #define INC_JOYSTICK_H_
 #include "main.h"
-#define adc_channel_count 4
+#define adc_channel_count 5
+// 5 because LDR is now included.
 
 struct StickStateEvent{
 	int16_t x,y,Rx,Ry;
