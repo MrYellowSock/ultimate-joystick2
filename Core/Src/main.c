@@ -252,15 +252,15 @@ int main(void)
 	while (1) {
 		if (getMacroState() == MACRO_STATE_PLAY) {
 			now = nextAction();
-//			DEBUGPRINTF("%u %u %u %u %u %u %u\n", now.command[0],
-//					now.command[1], now.command[2], now.command[3],
-//					now.command[4], now.command[5], now.timeSpan);
+			DEBUGPRINTF("%u %u %u %u %u %u %u\n", now.command[0],
+					now.command[1], now.command[2], now.command[3],
+					now.command[4], now.command[5], now.timeSpan);
 			memcpy(reportBuffer, now.command, COMMAND_SIZE);
 			HAL_Delay(now.timeSpan);
 			sendReport();
 		}
-		DEBUGPRINTF("LDR: %d\n",adc_dma_result[4]);
-		HAL_Delay(500);
+//		DEBUGPRINTF("LDR: %d\n",adc_dma_result[4]);
+//		HAL_Delay(500);
 		// array {ปุ่ม,ปุ่ม,x,y,z}
 		// uint8_t HID_buffer[5] = { 1, 1, 0, 0, 0 };
     /* USER CODE END WHILE */
@@ -300,7 +300,7 @@ void SystemClock_Config(void)
   /** Configure the main internal regulator output voltage
   */
   __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -310,9 +310,9 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 96;
+  RCC_OscInitStruct.PLL.PLLN = 216;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLQ = 9;
   RCC_OscInitStruct.PLL.PLLR = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -332,10 +332,10 @@ void SystemClock_Config(void)
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK)
   {
     Error_Handler();
   }

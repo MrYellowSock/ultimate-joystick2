@@ -9,8 +9,7 @@
 #define INC_MACRO_H_
 
 #include "main.h"
-#define MACRO_BUFFER_SIZE 100
-#define MACRO_MAX_WAIT 10000 //10 second of no input shall terminates
+#define MACRO_BUFFER_SIZE 1000
 
 #define MACRO_STATE_NONE 0
 #define MACRO_STATE_RECORD 1

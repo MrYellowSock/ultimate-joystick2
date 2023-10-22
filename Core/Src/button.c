@@ -1,5 +1,5 @@
 #include "button.h"
-#define debounce 20
+#define debounce 30
 #define EXTI_COUNT 16
 volatile uint8_t pinToButtonMapping[EXTI_COUNT] = { 13, 12, 14, 15, 4, 5, 3, 8, 10,
 		1, 9, 0, 2, 13, 11, BUTTON_MACRO };
