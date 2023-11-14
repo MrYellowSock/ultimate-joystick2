@@ -34,3 +34,4 @@
 		0xc0,                          //   END_COLLECTION
 		0xc0                           // END_COLLECTION
 4. แก้HID_MOUSE_REPORT_DESC_SIZE ใน define ให้เป็น 62U
+https://www.youtube.com/watch?v=ELDz6TAHSEQ
