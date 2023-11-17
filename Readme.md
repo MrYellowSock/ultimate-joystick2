@@ -1,8 +1,12 @@
 # USB Descriptor Modification
 - /Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.c
+
     nInterface 0x00 -> 0x04
+    
 - /Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h
+
     HID_MOUSE_REPORT_DESC_SIZE -> 64 (same size as below array)
+
 - /Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.c
     __ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE] __ALIGN_END =
     {
